@@ -1,0 +1,196 @@
+._76q0O {
+  box-shadow: 0 15px 40px -20px rgba(40, 44, 63, 0.15);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: #fff;
+  z-index: 1000;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: transform 0.3s ease;
+  contain: size layout style;
+  padding: 0 20px;
+
+  ._1EuBh {
+    max-width: 1200px;
+    min-width: 1200px;
+    position: relative;
+    margin: 0 auto;
+    height: 80px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+
+    .d9y3g {
+      display: block;
+      height: 49px;
+      transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+      margin-right: 16px;
+
+      ._8pSp- {
+        stroke: currentColor;
+        fill: #fc8019;
+        stroke-width: 0;
+      }
+
+      svg:not(:root) {
+        overflow: hidden;
+      }
+    }
+    ._1tcx6,
+    ._2z2N5 {
+      position: relative;
+    }
+
+    ._2z2N5 {
+      display: flex;
+      align-items: center;
+      margin-left: 30px;
+      max-width: 300px;
+      height: 30px;
+      cursor: pointer;
+      margin-bottom: -1px;
+      padding-right: 10px;
+
+      .expand-icon {
+        color: #fc8019;
+        position: absolute;
+        right: -16px;
+      }
+      ._1tcx6 {
+        font-weight: 700;
+        color: #3d4152;
+        float: left;
+
+        &::after {
+          content: "";
+          position: absolute;
+          height: 2px;
+          left: 0;
+          bottom: -5px;
+          width: 100%;
+          background: #3d4152;
+        }
+
+        ._3odgy {
+          display: block;
+          min-width: 30px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          font-size: 13px;
+        }
+      }
+    }
+
+    ._3HusE {
+      display: block;
+      padding-left: 5px;
+      margin-left: 5px;
+      color: #686b78;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+
+    .kVKTT {
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      color: #fc8019;
+      font-weight: 700;
+    }
+
+    .icon-downArrow:before {
+      content: "\E923";
+    }
+
+    ._1JNGZ {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: row-reverse;
+      height: 100%;
+      align-items: center;
+      list-style: none;
+    }
+
+    ._1fo6c:first-child {
+      margin-right: 0;
+    }
+    ._1fo6c {
+      margin-right: 60px;
+      color: #3d4152;
+      font-size: 16px;
+      font-weight: 500;
+
+      ._1fmVk {
+        position: relative;
+      }
+    }
+
+    ._2CgXb {
+      position: relative;
+      height: 80px;
+      cursor: pointer;
+    }
+    ._1T-E4,
+    ._2CgXb {
+      display: flex;
+      align-items: center;
+      padding-left: 28px;
+    }
+
+    ._1T-E4,
+    ._2CgXb {
+      display: flex;
+      align-items: center;
+      padding-left: 28px;
+    }
+
+    ._1T-E4 {
+      height: 100%;
+      margin-left: -28px;
+      color: inherit;
+
+      .PJaej {
+        color: #ffa700;
+        font-size: 10px;
+        top: 26px;
+        font-weight: 600;
+        position: absolute;
+        right: -24px;
+        text-transform: uppercase;
+      }
+    }
+
+    ._3yZyp {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      line-height: 0;
+
+      svg:not(:root) {
+        overflow: hidden;
+      }
+
+      ._1GTCc {
+        position: relative;
+        stroke: currentColor;
+        fill: #3d4152;
+        stroke-width: 0;
+      }
+    }
+  }
+}
+
+.expand-icon:hover > ._1tcx6 {
+  color: #fc8019;
+}

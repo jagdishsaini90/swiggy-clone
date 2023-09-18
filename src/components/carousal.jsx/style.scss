@@ -1,0 +1,73 @@
+.carousal-container {
+  width: 1066px;
+  margin: auto;
+  position: relative;
+
+  .cKmNa-d {
+    display: flex;
+    position: absolute;
+    margin-top: 12px;
+    right: 16px;
+  }
+  .ebepUu {
+    background: rgb(255, 255, 255);
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .iMCsYC {
+    background: rgb(255, 255, 255);
+    margin-bottom: 16px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+    overflow: hidden;
+  }
+
+  .iOOXDE {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .cOMcyj {
+    margin-right: 12px;
+  }
+
+  .OBHoC {
+    border-radius: 100%;
+    padding: 8px 8px 4px;
+    background: rgb(226, 226, 231);
+  }
+
+  .ebepUu {
+    background: rgb(255, 255, 255);
+    padding: 16px;
+    overflow: hidden;
+  }
+  .carousal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow: scroll;
+
+    .jTPCVN:first-child {
+      padding-left: 16px;
+    }
+
+    .jTPCVN {
+      width: max-content;
+      padding-right: 16px;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

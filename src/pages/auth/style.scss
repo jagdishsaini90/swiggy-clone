@@ -1,0 +1,160 @@
+.auth-container {
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: #282c3f;
+  opacity: 0.7;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  animation-name: Opensidebar;
+  animation-duration: 0.1s;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  z-index: 10005;
+  opacity: 1;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  max-width: 520px;
+}
+
+@keyframes Opensidebar {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes Closesidebar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+.login-container {
+  padding: 40px 112px 0 40px;
+
+  form {
+    margin-top: 30px;
+    .input {
+      background-color: transparent;
+      line-height: normal;
+      border: none;
+      height: 70px;
+      width: 100%;
+      font-size: 17px;
+      margin: 0;
+      padding: 0 20px;
+      padding-top: 22px;
+      box-shadow: none;
+      box-sizing: border-box;
+      border-radius: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+      border: 1px solid #d4d5d9;
+    }
+
+    .button {
+      width: 100%;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-block;
+      text-align: center;
+      border: none;
+      line-height: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      height: 50px;
+      padding: 0 2rem;
+      color: #fc8019;
+      letter-spacing: 0;
+      color: #fff;
+      background-color: #fc8019;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+      text-transform: uppercase;
+      margin-top: 30px;
+    }
+    .input:focus {
+      outline: none;
+    }
+  }
+  ._1FvHn {
+    font-size: 12px;
+    color: #686b78;
+    margin-top: 6px;
+    font-weight: 500;
+    .IBw2l {
+      color: #282c3f;
+      text-decoration: none;
+    }
+  }
+
+  .login-heading {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+
+    .login-heading_left {
+      p {
+        margin-top: 10px;
+        font-size: 14px;
+
+        span {
+          color: #fc8019;
+          cursor: pointer;
+        }
+
+        &:last-child {
+          border-bottom: 1px solid #000;
+          width: 30px;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}
+
+.input-row {
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+  animation-duration: 1s;
+  font-size: 17px;
+  color: #93959f;
+  font-weight: 400;
+}
+
+.label-animation {
+  top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+._3GOZo {
+  margin-top: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5d8ed5;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
