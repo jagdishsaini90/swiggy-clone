@@ -6,6 +6,7 @@ import Spinner from "../../components/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { sendOTP, verifyOTP } from "../../redux/action-creators";
 import { toast } from "react-toastify";
+import "./style.scss";
 
 const Signup = ({ setEnable, setViewPage }) => {
   const [number, setNumber] = useState("");

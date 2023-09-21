@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useAuthContext } from "../../utils/authProvider";
 import Spinner from "../../components/spinner";
+import "./style.scss";
 
 const Login = ({ setEnable, setViewPage }) => {
   const [number, setNumber] = useState("");
