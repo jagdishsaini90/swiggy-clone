@@ -9,6 +9,8 @@ import Search from "./pages/search";
 import RestaurantPage from "./pages/restaurant";
 import Collections from "./pages/collections";
 import { ToastContainer } from "react-toastify";
+import PrivateRoute from "./pages/auth/private";
+import NoService from "./pages/noService";
 
 const router = createBrowserRouter([
   {
@@ -17,39 +19,46 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: (
-      <>
-        <Header />
-        <HomePage />
-      </>
-    ),
-  },
-  {
-    path: "/search",
-    element: (
-      <>
-        <Header />
-        <Search />
-      </>
-    ),
-  },
-  {
-    path: "/restaurants/:name",
-    element: (
-      <>
-        <Header />
-        <RestaurantPage />
-      </>
-    ),
-  },
-  {
-    path: "/collections/:id",
-    element: (
-      <>
-        <Header />
-        <Collections />
-      </>
-    ),
+    element: <PrivateRoute />,
+    errorElement: <NoService />,
+    children: [
+      {
+        index: true,
+        element: (
+          <>
+            <Header />
+            <HomePage />
+          </>
+        ),
+      },
+      {
+        path: "/search",
+        element: (
+          <>
+            <Header />
+            <Search />
+          </>
+        ),
+      },
+      {
+        path: "/restaurants/:name",
+        element: (
+          <>
+            <Header />
+            <RestaurantPage />
+          </>
+        ),
+      },
+      {
+        path: "/collections/:id",
+        element: (
+          <>
+            <Header />
+            <Collections />
+          </>
+        ),
+      },
+    ],
   },
 ]);
 

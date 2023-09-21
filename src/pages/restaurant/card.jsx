@@ -30,7 +30,7 @@ const Card = ({ data = {} }) => {
                 <FontAwesomeIcon
                   icon={faBurger}
                   className={`${
-                    data.itemAttribute.vegClassifier === "VEG"
+                    data.itemAttribute?.vegClassifier === "VEG"
                       ? "text-[#0f8a65]"
                       : "text-[#e43b4f]"
                   } mr-2`}
