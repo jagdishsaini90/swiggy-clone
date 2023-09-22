@@ -12,6 +12,7 @@ import CART from "./cart";
 import SEARCHEDRESTAURANT from "./searchedRestaurant";
 import SIGNUP from "./signup";
 import OTP from "./otp";
+import LOGIN from "./login";
 
 const ConfigStore = () => {
   const store = createStore(
@@ -27,6 +28,7 @@ const ConfigStore = () => {
       searchedRestaurants: SEARCHEDRESTAURANT,
       signup: SIGNUP,
       otp: OTP,
+      login: LOGIN,
     }),
     applyMiddleware(thunk, logger)
   );

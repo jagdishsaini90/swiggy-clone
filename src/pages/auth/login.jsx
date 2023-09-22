@@ -1,34 +1,40 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { useAuthContext } from "../../utils/authProvider";
 import Spinner from "../../components/spinner";
 import "./style.scss";
+import { sendOTP, verifyOTP } from "../../redux/action-creators";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = ({ setEnable, setViewPage }) => {
   const [number, setNumber] = useState("");
   const [labelClass, setLabelClass] = useState(false);
-  const { loginHelper, message, otpHandler, setError, loading } =
-    useAuthContext();
   const [otp, setOtp] = useState("");
+  const dispatch = useDispatch();
+  const loginSelector = useSelector((state) => state.login);
+  const sendOtpSelector = useSelector((state) => state.otp);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      loginHelper({ number });
-    } catch (error) {
-      console.log(error.message);
-    }
+    dispatch(sendOTP({ number }));
   };
 
   const handleOtpSubmit = (e) => {
     e.preventDefault();
-    try {
-      otpHandler({ otp });
-    } catch (error) {
-      setError(error.message);
-    }
+    dispatch(
+      verifyOTP({
+        otp,
+        userId: sendOtpSelector.data?.userId,
+        number,
+        authType: "login",
+      })
+    );
   };
+
+  if (loginSelector.data?.fullyUpdated) {
+    window.location.href = "/";
+    return;
+  }
 
   return (
     <div className="login-container">
@@ -40,10 +46,10 @@ const Login = ({ setEnable, setViewPage }) => {
       <div className="login-heading">
         <div className="login-heading_left">
           <h1 className="text-[30px] font-semibold">
-            {message ? "Enter OTP" : "Login"}
+            {sendOtpSelector.data?.otpSent ? "Enter OTP" : "Login"}
           </h1>
           <p>
-            {message ? (
+            {sendOtpSelector.data?.otpSent ? (
               "We've sent an OTP to your phone number."
             ) : (
               <>
@@ -65,7 +71,7 @@ const Login = ({ setEnable, setViewPage }) => {
         </div>
       </div>
 
-      {message ? (
+      {sendOtpSelector.data?.otpSent ? (
         <form onSubmit={handleOtpSubmit}>
           <div className="input-row">
             <input
@@ -75,7 +81,6 @@ const Login = ({ setEnable, setViewPage }) => {
               className="input"
               onFocus={() => setLabelClass("otp")}
               onBlur={() => setLabelClass("")}
-              autoFocus={message}
             />
             <label
               className={`label ${
@@ -87,7 +92,7 @@ const Login = ({ setEnable, setViewPage }) => {
             </label>
           </div>
           <button className="button" type="submit">
-            {loading ? (
+            {loginSelector.isLoading ? (
               <div className="flex justify-center items-center">
                 <Spinner />
               </div>
@@ -118,7 +123,7 @@ const Login = ({ setEnable, setViewPage }) => {
             </label>
           </div>
           <button className="button" type="submit">
-            {loading ? (
+            {sendOtpSelector.isLoading ? (
               <div className="flex justify-center items-center">
                 <Spinner />
               </div>

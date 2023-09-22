@@ -13,6 +13,7 @@ import "./style.scss";
 import { useSelector } from "react-redux";
 import ChangeAddress from "./changeAddress";
 import Auth from "./auth";
+import UserDropdown from "./userDropdown";
 
 const headerRoutes = [
   {
@@ -114,7 +115,7 @@ const Header = () => {
               {headerRoutes.map((route) => {
                 return (
                   <Link
-                    className="hover:text-[#fc8019] relative text-[#3D4152]"
+                    className={`hover:text-[#fc8019] relative top-0 text-[#3D4152] text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px]`}
                     key={route.title}
                     to={route.to}
                     onClick={() =>
@@ -122,9 +123,26 @@ const Header = () => {
                         ? setEnable((prev) => !prev)
                         : {}
                     }
+                    onMouseOver={() => {
+                      if (
+                        route.title === "Sign In" &&
+                        userSelector.data?.name
+                      ) {
+                        setEnable(true);
+                      }
+                    }}
+                    // onMouseOut={(e) => {
+                    //   if (route.title === "Sign In" && enable) {
+                    //     console.log(e.clientY, e.clientX);
+                    //   }
+                    // }}
                   >
                     <FontAwesomeIcon className="mr-3" icon={route.icon} />
-                    {route.title}
+                    {route.title === "Sign In"
+                      ? userSelector.data?.name
+                        ? userSelector.data?.name
+                        : "Sign In"
+                      : route.title}
                     {route.badge ? (
                       <div className="text-[10px] top-[-4px] right-[-25px] font-semibold text-[#fc8019] absolute">
                         {route.badge}
@@ -139,7 +157,11 @@ const Header = () => {
         </div>
       </header>
       <ChangeAddress open={open} setOpen={setOpen} />
-      <Auth enable={enable} setEnable={setEnable} />
+      {userSelector.data?.name ? (
+        <UserDropdown enable={enable} setEnable={setEnable} />
+      ) : (
+        <Auth enable={enable} setEnable={setEnable} />
+      )}
     </>
   );
 };

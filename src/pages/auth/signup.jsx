@@ -1,11 +1,10 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuthContext } from "../../utils/authProvider";
 import Spinner from "../../components/spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { sendOTP, verifyOTP } from "../../redux/action-creators";
-import { toast } from "react-toastify";
 import "./style.scss";
 
 const Signup = ({ setEnable, setViewPage }) => {
@@ -35,29 +34,15 @@ const Signup = ({ setEnable, setViewPage }) => {
         email,
         number,
         userId: sendOtpSelector.data?.userId,
+        authType: "signup",
       })
     );
   };
 
-  if (signupSelector.data?.email) {
+  if (signupSelector.data?.fullyUpdated) {
     window.location.href = "/";
     return;
   }
-
-  useEffect(() => {
-    if (sendOtpSelector.error || signupSelector.error) {
-      toast.error(sendOtpSelector.error || signupSelector.error, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  }, [sendOtpSelector, signupSelector]);
 
   return (
     <div className="login-container">

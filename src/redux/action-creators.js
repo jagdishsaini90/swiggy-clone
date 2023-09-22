@@ -1,6 +1,18 @@
+import { toast } from "react-toastify";
 import { APPWRITE_ACCOUNT, APPWRITE_ID } from "../appwrite";
 import * as ActionTypes from "./action-types";
 import axios from "axios";
+
+const toastCommonProps = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+};
 
 export const restaurantsLoading = () => ({
   type: ActionTypes.RESTAURANTS_LOADING,
@@ -287,8 +299,58 @@ export const signupHelper = (data) => (dispatch) => {
       phone: number,
       updatedUser,
     })
-    .then((data) => dispatch(signupData(data.data.user)))
-    .catch((error) => dispatch(signupError(error.message)));
+    .then((data) => {
+      if (data.data.user.fullyUpdated) {
+        localStorage.setItem("user_data", JSON.stringify(data.data.user));
+        dispatch(signupData(data.data.user));
+      } else {
+        dispatch(signupError(data.data.message));
+        toast.error(data.data.message, toastCommonProps);
+      }
+    })
+    .catch((error) => {
+      dispatch(signupError(error.message));
+      toast.error(error.message, toastCommonProps);
+    });
+};
+
+// LOGIN
+
+export const loginLoading = () => ({
+  type: ActionTypes.LOADING_LOGIN,
+});
+export const loginData = (payload) => ({
+  type: ActionTypes.ADD_LOGIN,
+  payload,
+});
+export const loginError = (payload) => ({
+  type: ActionTypes.ERROR_LOGIN,
+  payload,
+});
+
+export const loginHelper = (data) => (dispatch) => {
+  dispatch(loginLoading());
+
+  const { number, updatedUser } = data;
+
+  return axios
+    .post(`${import.meta.env.VITE_LOCALHOST_API_END_POINT}/api/login`, {
+      phone: number,
+      updatedUser,
+    })
+    .then((data) => {
+      if (data.data.user.fullyUpdated) {
+        localStorage.setItem("user_data", JSON.stringify(data.data.user));
+        dispatch(loginData(data.data.user));
+      } else {
+        dispatch(loginError(data.data.message));
+        toast.error(data.data.message, toastCommonProps);
+      }
+    })
+    .catch((error) => {
+      dispatch(loginError(error.message));
+      toast.error(error.message, toastCommonProps);
+    });
 };
 
 // OTP
@@ -313,17 +375,31 @@ export const sendOTP = (data) => (dispatch) => {
     `+91${number}`
   )
     .then((response) => dispatch(otpData({ ...response, otpSent: true })))
-    .catch((error) => dispatch(otpError(error.message)));
+    .catch((error) => {
+      dispatch(otpError(error.message));
+      toast.error(error.message, toastCommonProps);
+    });
 };
 
 export const verifyOTP = (data) => (dispatch) => {
-  dispatch(signupLoading());
-  const { otp, userId, email, name, number } = data;
+  const { otp, userId, email, name, number, authType } = data;
+  if (authType === "signup") {
+    dispatch(signupLoading());
+  } else {
+    dispatch(loginLoading());
+  }
 
   return APPWRITE_ACCOUNT.updatePhoneSession(userId, otp)
     .then((updatedUser) => {
       dispatch(sendOTP({}));
-      dispatch(signupHelper({ updatedUser, email, name, number }));
+      if (authType === "signup")
+        dispatch(signupHelper({ updatedUser, email, name, number }));
+      else if (authType === "login") {
+        dispatch(loginHelper({ updatedUser, number }));
+      }
     })
-    .catch((error) => dispatch(otpError(error.message)));
+    .catch((error) => {
+      dispatch(otpError(error.message));
+      toast.error(error.message, toastCommonProps);
+    });
 };
