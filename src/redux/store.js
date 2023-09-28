@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import RESTAURANTS from "./restaurants";
 import LOCATIONS from "./locations";
 import ADDRESS from "./address";
@@ -30,7 +30,7 @@ const ConfigStore = () => {
       otp: OTP,
       login: LOGIN,
     }),
-    applyMiddleware(thunk, logger)
+    applyMiddleware(thunk)
   );
 
   return store;

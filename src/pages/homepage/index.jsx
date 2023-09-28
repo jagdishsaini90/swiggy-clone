@@ -10,7 +10,6 @@ import List from "../../components/list";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const restaurantsSelector = useSelector((state) => state.restaurants);
 

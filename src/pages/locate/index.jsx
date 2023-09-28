@@ -5,7 +5,6 @@ import { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import Spinner from "../../components/spinner";
-import { useNavigate } from "react-router-dom";
 import { fetchAddress, fetchLocation } from "../../redux/action-creators";
 import { useDispatch, useSelector } from "react-redux";
 import SearchList from "./searchList";
@@ -37,7 +36,6 @@ function Locate() {
     loading: "",
   });
   const headingRef = useRef();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const locationSelector = useSelector((state) => state.locations);
   const addressSelector = useSelector((state) => state.address);

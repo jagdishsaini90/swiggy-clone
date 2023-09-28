@@ -309,8 +309,8 @@ export const signupHelper = (data) => (dispatch) => {
       }
     })
     .catch((error) => {
-      dispatch(signupError(error.message));
-      toast.error(error.message, toastCommonProps);
+      dispatch(signupError(error?.response?.data?.message));
+      toast.error(error?.response?.data?.message, toastCommonProps);
     });
 };
 
@@ -339,7 +339,7 @@ export const loginHelper = (data) => (dispatch) => {
       updatedUser,
     })
     .then((data) => {
-      if (data.data.user.fullyUpdated) {
+      if (data.data.user) {
         localStorage.setItem("user_data", JSON.stringify(data.data.user));
         dispatch(loginData(data.data.user));
       } else {
@@ -348,8 +348,8 @@ export const loginHelper = (data) => (dispatch) => {
       }
     })
     .catch((error) => {
-      dispatch(loginError(error.message));
-      toast.error(error.message, toastCommonProps);
+      dispatch(loginError(error?.response?.data?.message));
+      toast.error(error?.response?.data?.message, toastCommonProps);
     });
 };
 

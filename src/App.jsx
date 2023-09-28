@@ -2,71 +2,46 @@ import "./App.css";
 import Locate from "./pages/locate";
 import Footer from "./pages/footer";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 import HomePage from "./pages/homepage";
-import Header from "./components/header";
 import Search from "./pages/search";
 import RestaurantPage from "./pages/restaurant";
 import Collections from "./pages/collections";
 import { ToastContainer } from "react-toastify";
 import PrivateRoute from "./pages/auth/private";
-import NoService from "./pages/noService";
+import Error from "./pages/error";
 
-const router = createBrowserRouter([
-  {
-    path: "/locate",
-    element: <Locate />,
-  },
-  {
-    path: "/",
-    element: <PrivateRoute />,
-    errorElement: <NoService />,
-    children: [
-      {
-        index: true,
-        element: (
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" errorElement={<Error />}>
+      <Route
+        path="locate"
+        element={
           <>
-            <Header />
-            <HomePage />
+            <Locate />
+            <Footer />
           </>
-        ),
-      },
-      {
-        path: "/search",
-        element: (
-          <>
-            <Header />
-            <Search />
-          </>
-        ),
-      },
-      {
-        path: "/restaurants/:name",
-        element: (
-          <>
-            <Header />
-            <RestaurantPage />
-          </>
-        ),
-      },
-      {
-        path: "/collections/:id",
-        element: (
-          <>
-            <Header />
-            <Collections />
-          </>
-        ),
-      },
-    ],
-  },
-]);
+        }
+      />
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/restaurants/:name" element={<RestaurantPage />} />
+        <Route path="/collections/:id" element={<Collections />} />
+      </Route>
+    </Route>
+  )
+);
 
 function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <Footer />
       <ToastContainer
         position="top-right"
         autoClose={5000}

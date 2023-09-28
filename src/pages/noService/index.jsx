@@ -1,12 +1,11 @@
-import React, { useState } from "react";
 import "./style.scss";
 import Bricks from "../../components/bricks";
 import LinkBanner from "../../components/LinkBanner";
 
 const NoService = ({ data }) => {
-  const [showCities, setShowCities] = useState(false);
   const { cities, title } = data[1]?.card?.card;
   const appLinks = data[2]?.card?.card;
+
   return (
     <div>
       <div className="sc-BrFsL lidxXy">
@@ -23,17 +22,9 @@ const NoService = ({ data }) => {
             </div>
             <div className="sc-bczRLJ duPbln">Location Unserviceable</div>
             <div className="sc-bczRLJ gRCWUT sc-gVAlfg iQcrzC">
-              We don’t have any services here till now. Try changing location.
-            </div>
-            <div className="sc-ikZpkk bWpoft">
-              <button
-                type="button"
-                className="sc-jIZahH bZCWOc sc-hKdnnL jkKqlE"
-              >
-                <span className="sc-bczRLJ fqEZIB">
-                  <div className="sc-bczRLJ cdfZE">Change Location</div>
-                </span>
-              </button>
+              {
+                "We don’t have any services here till now. Try changing location."
+              }
             </div>
           </div>
           <div></div>

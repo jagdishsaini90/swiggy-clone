@@ -1,6 +1,6 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../components/spinner";
 import "./style.scss";
 import { sendOTP, verifyOTP } from "../../redux/action-creators";
@@ -16,11 +16,15 @@ const Login = ({ setEnable, setViewPage }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    if (!number) return;
+
     dispatch(sendOTP({ number }));
   };
 
   const handleOtpSubmit = (e) => {
     e.preventDefault();
+    if (!otp || !number) return;
+
     dispatch(
       verifyOTP({
         otp,
@@ -31,10 +35,12 @@ const Login = ({ setEnable, setViewPage }) => {
     );
   };
 
-  if (loginSelector.data?.fullyUpdated) {
-    window.location.href = "/";
-    return;
-  }
+  useEffect(() => {
+    if (loginSelector.data?.fullyUpdated) {
+      window.location.href = "/";
+      return;
+    }
+  }, [loginSelector]);
 
   return (
     <div className="login-container">
