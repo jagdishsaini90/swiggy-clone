@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBowlingBall,
@@ -10,10 +10,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link } from "react-router-dom";
 import "./style.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ChangeAddress from "./changeAddress";
 import Auth from "./auth";
 import UserDropdown from "./userDropdown";
+import { fetchCart } from "../../redux/action-creators";
 
 const headerRoutes = [
   {
@@ -65,17 +66,33 @@ const Header = () => {
   const cartSelector = useSelector((state) => state.cart);
   const userSelector = useSelector((state) => state.signup);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    let count = cartSelector.data.reduce((acc, val) => acc + val.quantity, 0);
-    setCart(count);
+    setCart(
+      cartSelector.data?.documents?.reduce(
+        (acc, item) => item.quantity + acc,
+        0
+      )
+    );
   }, [cartSelector]);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("user_data"))) {
+      dispatch(fetchCart());
+    }
+  }, []);
 
   return (
     <>
       <header className="_76q0O">
         <div className="global-nav">
           <div className="_1EuBh">
-            <Link to="/" className="d9y3g" title="Swiggy">
+            <Link
+              to="/"
+              className="hover:scale-[1.1] transition-all"
+              title="Swiggy"
+            >
               <svg
                 className="_8pSp-"
                 viewBox="0 0 559 825"
@@ -131,11 +148,6 @@ const Header = () => {
                         setEnable(true);
                       }
                     }}
-                    // onMouseOut={(e) => {
-                    //   if (route.title === "Sign In" && enable) {
-                    //     console.log(e.clientY, e.clientX);
-                    //   }
-                    // }}
                   >
                     <FontAwesomeIcon className="mr-3" icon={route.icon} />
                     {route.title === "Sign In"
@@ -148,7 +160,11 @@ const Header = () => {
                         {route.badge}
                       </div>
                     ) : null}
-                    {route.title === "cart" ? <div>{cart}</div> : null}
+                    {route.title === "Cart" ? (
+                      <div className="absolute top-[-4px] left-[5px] font-bold text-[#fc8019]">
+                        {cart}
+                      </div>
+                    ) : null}
                   </Link>
                 );
               })}

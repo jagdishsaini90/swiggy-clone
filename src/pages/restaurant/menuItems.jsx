@@ -24,6 +24,7 @@ const ItemCards = ({ card = {}, setListCoords }) => {
   useEffect(() => {
     setListCoords((prev) => [...prev, ref]);
   }, []);
+
   return (
     <div ref={ref}>
       <Accordian titleBold={true} data={card} />

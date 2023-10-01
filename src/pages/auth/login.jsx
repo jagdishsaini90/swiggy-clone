@@ -36,7 +36,7 @@ const Login = ({ setEnable, setViewPage }) => {
   };
 
   useEffect(() => {
-    if (loginSelector.data?.fullyUpdated) {
+    if (loginSelector.data?.success) {
       window.location.href = "/";
       return;
     }

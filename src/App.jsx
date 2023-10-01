@@ -15,6 +15,7 @@ import Collections from "./pages/collections";
 import { ToastContainer } from "react-toastify";
 import PrivateRoute from "./pages/auth/private";
 import Error from "./pages/error";
+import Cart from "./pages/cart";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
         <Route path="/search" element={<Search />} />
         <Route path="/restaurants/:name" element={<RestaurantPage />} />
         <Route path="/collections/:id" element={<Collections />} />
+        <Route path="/cart" element={<Cart />} />
       </Route>
     </Route>
   )

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurants } from "../../redux/action-creators";
 import HomePageShimmer from "./homePageShimmer";

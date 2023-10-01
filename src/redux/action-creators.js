@@ -14,6 +14,8 @@ const toastCommonProps = {
   theme: "light",
 };
 
+const { VITE_LOCALHOST_API_END_POINT } = import.meta.env;
+
 export const restaurantsLoading = () => ({
   type: ActionTypes.RESTAURANTS_LOADING,
 });
@@ -29,7 +31,7 @@ export const restaurantsError = (payload) => ({
 export const fetchRestaurants = (queryString) => (dispatch) => {
   dispatch(restaurantsLoading());
 
-  let url = `${import.meta.env.VITE_LOCALHOST_API_END_POINT}/api/restaurants?`;
+  let url = `${VITE_LOCALHOST_API_END_POINT}/api/restaurants?`;
 
   Object.keys(queryString).map((key, index) => {
     url += `${key}=${queryString[key]}`;
@@ -67,11 +69,7 @@ export const locationsError = (payload) => ({
 export const fetchLocation = (data) => (dispatch) => {
   dispatch(locationsLoading());
   return axios
-    .get(
-      `${
-        import.meta.env.VITE_LOCALHOST_API_END_POINT
-      }/api/search?search=${data}`
-    )
+    .get(`${VITE_LOCALHOST_API_END_POINT}/api/search?search=${data}`)
     .then((response) => {
       dispatch(locationsData(response.data.data));
     })
@@ -99,9 +97,7 @@ export const fetchAddress = (data) => (dispatch) => {
   dispatch(addressLoading());
 
   return axios
-    .get(
-      `${import.meta.env.VITE_LOCALHOST_API_END_POINT}/api/address?${urlQuery}`
-    )
+    .get(`${VITE_LOCALHOST_API_END_POINT}/api/address?${urlQuery}`)
     .then((response) => {
       localStorage.setItem(
         "csrfToken",
@@ -130,7 +126,7 @@ export const fetchUpdate = (data) => (dispatch) => {
   dispatch(updateLoading());
 
   return axios
-    .post(`${import.meta.env.VITE_LOCALHOST_API_END_POINT}/api/update`, {
+    .post(`${VITE_LOCALHOST_API_END_POINT}/api/update`, {
       data,
     })
     .then((response) => {
@@ -158,9 +154,7 @@ export const fetchrPreSearch = (data) => (dispatch) => {
 
   return axios
     .get(
-      `${import.meta.env.VITE_LOCALHOST_API_END_POINT}/api/pre_search?lat=${
-        data.lat
-      }&lng=${data.lng}`
+      `${VITE_LOCALHOST_API_END_POINT}/api/pre_search?lat=${data.lat}&lng=${data.lng}`
     )
     .then((response) => {
       dispatch(preSearchData(response.data.data.cards));
@@ -187,9 +181,7 @@ export const fetchSearchRestaunrants = (data) => (dispatch) => {
 
   return axios
     .get(
-      `${
-        import.meta.env.VITE_LOCALHOST_API_END_POINT
-      }/api/search_restaurants?lat=${data.lat}&lng=${data.lng}&str=${data.str}`
+      `${VITE_LOCALHOST_API_END_POINT}/api/search_restaurants?lat=${data.lat}&lng=${data.lng}&str=${data.str}`
     )
     .then((response) => {
       dispatch(
@@ -221,9 +213,7 @@ export const fetchSingleRestaunrant = (data) => (dispatch) => {
 
   return axios
     .get(
-      `${
-        import.meta.env.VITE_LOCALHOST_API_END_POINT
-      }/api/single_restaurant?lat=${data.lat}&lng=${data.lng}&str=${data.str}`
+      `${VITE_LOCALHOST_API_END_POINT}/api/single_restaurant?lat=${data.lat}&lng=${data.lng}&str=${data.str}`
     )
     .then((response) => {
       dispatch(singleRestaurantData(response.data.data.cards));
@@ -251,9 +241,7 @@ export const fetchSearchedRestaunrant = (data) => (dispatch) => {
 
   return axios
     .get(
-      `${
-        import.meta.env.VITE_LOCALHOST_API_END_POINT
-      }/api/searched_restaurant?lat=${lat}&lng=${lng}&restaurantId=${restaurantId}&query=${query}`
+      `${VITE_LOCALHOST_API_END_POINT}/api/searched_restaurant?lat=${lat}&lng=${lng}&restaurantId=${restaurantId}&query=${query}`
     )
     .then((response) => {
       dispatch(addSearchedRestaurantData(response.data.data.cards));
@@ -263,13 +251,79 @@ export const fetchSearchedRestaunrant = (data) => (dispatch) => {
     });
 };
 
-export const addToCart = (payload) => ({
+export const addToCart = () => ({
   type: ActionTypes.ADD_TO_CART,
+});
+
+export const cartLoading = () => ({
+  type: ActionTypes.LOADING_CART,
+});
+
+export const cartError = (payload) => ({
+  type: ActionTypes.ERROR_CART,
+  payload,
+});
+export const cartData = (payload) => ({
+  type: ActionTypes.CART_DATA,
   payload,
 });
 
+export const removeFromCart = () => ({
+  type: ActionTypes.REMOVE_FROM_CART,
+});
+
+export const fetchCart = () => (dispatch) => {
+  dispatch(cartLoading());
+  const user = JSON.parse(localStorage.getItem("user_data"));
+
+  return axios
+    .get(
+      `${VITE_LOCALHOST_API_END_POINT}/api/getcart?database=${user?.database}`
+    )
+    .then((data) => dispatch(cartData(data.data.cart)))
+    .catch((error) => {
+      dispatch(cartError(error?.response?.data?.message));
+      toast.error(error?.response?.data?.message, toastCommonProps);
+    });
+};
+
 export const addItemToCart = (data) => (dispatch) => {
-  return dispatch(addToCart(data));
+  const user = JSON.parse(localStorage.getItem("user_data"));
+
+  return axios
+    .post(`${VITE_LOCALHOST_API_END_POINT}/api/addToCart`, {
+      number: user?.phone,
+      cart: data,
+      database: user?.database,
+      userId: user?.userId,
+    })
+    .then(() => {
+      dispatch(fetchCart());
+      toast.success("successfully added to cart!", toastCommonProps);
+    })
+    .catch((error) => {
+      console.log(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message, toastCommonProps);
+    });
+};
+
+export const removeItemFromCart = (id) => (dispatch) => {
+  const user = JSON.parse(localStorage.getItem("user_data"));
+
+  return axios
+    .post(`${VITE_LOCALHOST_API_END_POINT}/api/removeCart`, {
+      number: user?.phone,
+      id,
+      database: user?.database,
+    })
+    .then(() => {
+      dispatch(fetchCart());
+      toast.success("successfully removed from cart!", toastCommonProps);
+    })
+    .catch((error) => {
+      console.log(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message, toastCommonProps);
+    });
 };
 
 // Authentication
@@ -287,20 +341,18 @@ export const signupError = (payload) => ({
   payload,
 });
 
-export const signupHelper = (data) => (dispatch) => {
-  dispatch(signupLoading());
-
+export const signupHelper = (data) => async (dispatch) => {
   const { email, name, number, updatedUser } = data;
 
-  return axios
-    .post(`${import.meta.env.VITE_LOCALHOST_API_END_POINT}/api/create_user`, {
+  return await axios
+    .post(`${VITE_LOCALHOST_API_END_POINT}/api/create_user`, {
       name,
       email,
       phone: number,
       updatedUser,
     })
     .then((data) => {
-      if (data.data.user.fullyUpdated) {
+      if (data.data.user.success) {
         localStorage.setItem("user_data", JSON.stringify(data.data.user));
         dispatch(signupData(data.data.user));
       } else {
@@ -329,12 +381,10 @@ export const loginError = (payload) => ({
 });
 
 export const loginHelper = (data) => (dispatch) => {
-  dispatch(loginLoading());
-
   const { number, updatedUser } = data;
 
   return axios
-    .post(`${import.meta.env.VITE_LOCALHOST_API_END_POINT}/api/login`, {
+    .post(`${VITE_LOCALHOST_API_END_POINT}/api/login`, {
       phone: number,
       updatedUser,
     })
@@ -374,7 +424,10 @@ export const sendOTP = (data) => (dispatch) => {
     APPWRITE_ID.unique(),
     `+91${number}`
   )
-    .then((response) => dispatch(otpData({ ...response, otpSent: true })))
+    .then((response) => {
+      dispatch(otpData({ ...response, otpSent: true }));
+      toast.success("otp sent successfully!", toastCommonProps);
+    })
     .catch((error) => {
       dispatch(otpError(error.message));
       toast.error(error.message, toastCommonProps);
@@ -391,12 +444,12 @@ export const verifyOTP = (data) => (dispatch) => {
 
   return APPWRITE_ACCOUNT.updatePhoneSession(userId, otp)
     .then((updatedUser) => {
-      dispatch(sendOTP({}));
       if (authType === "signup")
         dispatch(signupHelper({ updatedUser, email, name, number }));
-      else if (authType === "login") {
+      if (authType === "login") {
         dispatch(loginHelper({ updatedUser, number }));
       }
+      dispatch(sendOTP({}));
     })
     .catch((error) => {
       dispatch(otpError(error.message));

@@ -1,6 +1,6 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "../../utils/authProvider";
 import Spinner from "../../components/spinner";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +44,7 @@ const Signup = ({ setEnable, setViewPage }) => {
   };
 
   useEffect(() => {
-    if (signupSelector.data?.fullyUpdated) {
+    if (signupSelector.data?.success) {
       window.location.href = "/";
       return;
     }

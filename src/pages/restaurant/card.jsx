@@ -6,19 +6,13 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../../redux/action-creators";
+import { addItemToCart, removeItemFromCart } from "../../redux/action-creators";
 
 const Card = ({ data = {} }) => {
   const [addingToCart, setAddToCart] = useState(0);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (addingToCart >= 0) {
-      dispatch(addItemToCart({ ...data, quantity: addingToCart }));
-    }
-  }, [addingToCart]);
 
   return (
     <>
@@ -111,29 +105,46 @@ const Card = ({ data = {} }) => {
               >
                 <div className="relative">
                   <div
-                    onClick={() =>
-                      addingToCart > 0 ? {} : setAddToCart((prev) => prev + 1)
-                    }
+                    onClick={() => {
+                      if (addingToCart === 0) {
+                        dispatch(
+                          addItemToCart({
+                            ...data,
+                            restaurantId: location.pathname.split("-").pop(),
+                          })
+                        );
+                        setAddToCart(1);
+                      }
+                    }}
                     className="cursor-pointer ml-[10px] hover:shadow-sm absolute border-[1px] border-gray-200 font-bold top-[-30px] bg-[#fff] flex justify-evenly items-center m-auto w-[95px] h-[35px] text-[#60b246] text-[12px]"
                   >
                     {addingToCart > 0 ? (
                       <>
                         <button
-                          onClick={() =>
-                            addingToCart < 1
-                              ? {}
-                              : setAddToCart((prev) => prev - 1)
-                          }
+                          onClick={() => {
+                            if (addingToCart >= 1) {
+                              dispatch(removeItemFromCart(data.id));
+                              setAddToCart((prev) => prev - 1);
+                            }
+                          }}
                         >
                           <FontAwesomeIcon icon={faMinus} />
                         </button>
                         <span>{addingToCart}</span>
                         <button
-                          onClick={() =>
-                            addingToCart > 10
-                              ? {}
-                              : setAddToCart((prev) => prev + 1)
-                          }
+                          onClick={() => {
+                            if (addingToCart <= 10) {
+                              dispatch(
+                                addItemToCart({
+                                  ...data,
+                                  restaurantId: location.pathname
+                                    .split("-")
+                                    .pop(),
+                                })
+                              );
+                              setAddToCart((prev) => prev + 1);
+                            }
+                          }}
                         >
                           <FontAwesomeIcon icon={faPlus} />
                         </button>

@@ -45,6 +45,7 @@ function Locate() {
 
   if (address) {
     window.location.href = "/";
+    return;
   }
 
   useEffect(() => {
