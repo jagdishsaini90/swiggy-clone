@@ -11,7 +11,7 @@ const Download = () => {
                 className="_2dYjq"
                 width="105"
                 height="199"
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_210,h_398/4x_-_No_min_order_x0bxuf"
+                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_210,h_398/4x_-_No_min_order_x0bxuf"
               />
             </div>
             <div className="_3fted">No Minimum Order</div>
@@ -26,7 +26,7 @@ const Download = () => {
                 className="_2dYjq"
                 width="112"
                 height="206"
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_224,h_412/4x_Live_order_zzotwy"
+                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_224,h_412/4x_Live_order_zzotwy"
               />
             </div>
             <div className="_3fted">Live Order Tracking</div>
@@ -41,7 +41,7 @@ const Download = () => {
                 className="_2dYjq"
                 width="124"
                 height="188"
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_248,h_376/4x_-_Super_fast_delivery_awv7sn"
+                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_248,h_376/4x_-_Super_fast_delivery_awv7sn"
               />
             </div>
             <div className="_3fted">Lightning-Fast Delivery</div>
@@ -70,7 +70,7 @@ const Download = () => {
               <img
                 className="_12dJy"
                 height="54"
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_108/play_ip0jfp"
+                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_108/play_ip0jfp"
               />
             </a>
             <a
@@ -81,7 +81,7 @@ const Download = () => {
               <img
                 className="_37Cft"
                 height="54"
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_108/iOS_ajgrty"
+                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_108/iOS_ajgrty"
               />
             </a>
           </div>
@@ -89,13 +89,13 @@ const Download = () => {
             className="_3QGpR"
             width="384"
             height="489"
-            src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_768,h_978/pixel_wbdy4n"
+            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_768,h_978/pixel_wbdy4n"
           />
           <img
             className="_2SJnz"
             width="384"
             height="489"
-            src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_768,h_978/iPhone_wgconp_j0d1fn"
+            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_768,h_978/iPhone_wgconp_j0d1fn"
           />
         </div>
       </div>

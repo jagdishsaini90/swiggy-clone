@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 export function Card({ data }) {
   const width = data?.cta?.text === "RESTAURANT_MENU" ? "235" : "273";
   const height = data?.cta?.text === "RESTAURANT_MENU" ? "156" : "181";
-
   return (
     <Link
       to={`/restaurants/${data?.cta?.link?.split("/")?.pop()}`}

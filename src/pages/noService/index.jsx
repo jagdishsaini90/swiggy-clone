@@ -14,7 +14,7 @@ const NoService = ({ data }) => {
             <div className="sc-dwVMhp hRA-DuF">
               <img
                 className="sc-hKMtZM gXNoYr"
-                src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png"
+                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png"
                 width="238"
                 height="238"
                 alt="location unservicable image"

@@ -72,7 +72,7 @@ const Login = ({ setEnable, setViewPage }) => {
           <img
             width="100"
             height="105"
-            src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r"
+            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r"
           />
         </div>
       </div>

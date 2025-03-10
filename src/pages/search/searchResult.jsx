@@ -56,7 +56,7 @@ const SearchResult = ({
                 <img
                   className="_2tuBw _12_oN _1zEmH"
                   alt=""
-                  src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_112,h_112,c_fill/Icons-Autosuggest/AS_Search_3x"
+                  src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_112,h_112,c_fill/Icons-Autosuggest/AS_Search_3x"
                 />
               </div>
               <div className="_3sa8N">

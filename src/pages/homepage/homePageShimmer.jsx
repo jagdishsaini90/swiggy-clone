@@ -9,7 +9,7 @@ const HomePageShimmer = () => {
           <div className="hk9dS"></div>
           <img
             className="_3izdr"
-            src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/icecream_wwomsa"
+            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/icecream_wwomsa"
           />
         </div>
         <div className="_1X6xY">Looking for great food near you ...</div>

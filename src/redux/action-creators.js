@@ -241,9 +241,13 @@ export const fetchSearchedRestaunrant = (data) => (dispatch) => {
 
   return axios
     .get(
-      `${VITE_LOCALHOST_API_END_POINT}/api/searched_restaurant?lat=${lat}&lng=${lng}&restaurantId=${restaurantId}&query=${query}`
+      `${VITE_LOCALHOST_API_END_POINT}/api/searched_restaurant?lat=${lat}&lng=${lng}&restaurantId=${restaurantId.slice(
+        4
+      )}&query=${query}`
     )
     .then((response) => {
+      console.log(response.data.data.cards);
+
       dispatch(addSearchedRestaurantData(response.data.data.cards));
     })
     .catch((error) => {
